@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
 
   "name": "Pearl",
   "description": "This extension is a starting point to create a real Chrome extension",
@@ -17,10 +17,8 @@
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "all_frames": true,
-    "js": ["assets/js/contentScript.js"]
+    "js": ["assets/js/require.js","assets/js/contentScript.js"]
 }],
-  "web_accessible_resources": [{  
-  "resources": ["logo192.png", "logo512.png", "happy.png"],
-  "matches": ["<all_urls>"]}
-  ]
+  "web_accessible_resources": ["logo192.png", "logo512.png", "happy.png"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

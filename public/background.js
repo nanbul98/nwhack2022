@@ -2,7 +2,8 @@
 // background.js
 
 
-
+// import rp from 'request-promise';
+// import $ from 'cheerio';
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({ logo });
@@ -17,9 +18,9 @@ chrome.runtime.onMessage.addListener(async function(message, sender, senderRespo
       target: { tabId: tab.id },
       function: addImage,
     });
-    hrome.scripting.executeScript({
+    chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: scraper(),
+      function: scraper,
     });
     // senderResponse({data: tab});
     return true;
@@ -27,6 +28,9 @@ chrome.runtime.onMessage.addListener(async function(message, sender, senderRespo
 });
 
 function addImage() {
+      // var require_script = document.createElement('script');
+      // require_script.setAttribute("src","assets/js/require.js");
+      // document.head.appendChild(require_script);
       let logo = chrome.runtime.getURL("happy.png");
       var elemDiv = document.createElement('img');
       elemDiv.setAttribute("id", "blobby67");
@@ -38,22 +42,25 @@ function addImage() {
 
   // SCRAPING
 function scraper(){
-  const rp = require('request-promise');
-  const $ = require('cheerio');
-  const url = 'https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States';
+  require(['request-promise', 'cheerio'], function (rp, $) {
+    const url = 'https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States';
   
-  rp(url)
-    .then(function(html){
-      //success!
-      const wikiUrls = [];
-      for (let i = 0; i < 45; i++) {
-        wikiUrls.push($('big > a', html)[i].attribs.href);
-      }
-      console.log(wikiUrls);
-    })
-    .catch(function(err){
-      //handle error
-    });
+    rp(url)
+      .then(function(html){
+        //success!
+        const wikiUrls = [];
+        for (let i = 0; i < 45; i++) {
+          wikiUrls.push($('big > a', html)[i].attribs.href);
+        }
+        console.log(wikiUrls);
+      })
+      .catch(function(err){
+        //handle error
+      });
+  });
+  // const rp = require('request-promise');
+  // const $ = require('cheerio');
+ 
 }
 
 
