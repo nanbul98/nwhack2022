@@ -5,7 +5,7 @@ var depthStart;
 var init = function(){
 
 	depthBottomPixel = meterToPixel(depthBottomMeters);
-	depthStart = depthBottomPixel - meterToPixel(depthBottomMeters * 0.4);
+	depthStart = depthBottomPixel - meterToPixel(depthBottomMeters * 0.8);
 
 	$(window).scroll(function(e){
 
@@ -13,9 +13,9 @@ var init = function(){
 		var docHeight = document.body.scrollHeight;
 
 		var progress = (s - depthStart) / (depthBottomPixel - depthStart);
-		if(progress > -0.2){
+		if(progress > 0){
 			// Prevent further scrolling
-			$("body, html").scrollTop(depthBottomPixel);
+			// $("body, html").scrollTop(depthBottomPixel);
 			elemDiv = document.getElementById("blobby67")
 			elemDiv.src = chrome.runtime.getURL("snorkler.png")
 			console.log("in too deep")
@@ -31,8 +31,9 @@ function meterToPixel(m){
 }
 
 
+window.addEventListener("load", async () => {init()});
+
+
 window.addEventListener("load", async () => {
     chrome.runtime.sendMessage({msg: 'image'});
 });
-
-window.addEventListener("load", async () => {init()});

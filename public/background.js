@@ -88,10 +88,4 @@ function addImage() {
     // })
     })
 
-
-  // }
-  // maxEmotionCount = Math.max(...emotionCount)
-  // modeEmotion = emotions[emotionCount.indexOf(maxEmotionCount)]
-  // console.log(emotionCount)
-  // console.log(modeEmotion)
 }
