@@ -2,7 +2,7 @@
   "manifest_version": 3,
 
   "name": "Pearl",
-  "description": "This extension is a starting point to create a real Chrome extension",
+  "description": "Your web browsing companion",
   "version": "0.0.1",
   "background": {
     "service_worker": "background.js"
@@ -10,6 +10,10 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "icons": { 
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png" },
   "permissions": [ "storage", "activeTab", "scripting","tabs",
     "notifications"
   ],
