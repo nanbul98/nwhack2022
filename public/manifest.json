@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+
+  "name": "My Extension",
+  "description": "This extension is a starting point to create a real Chrome extension",
+  "version": "0.0.1",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [ "storage", "activeTab", "scripting","tabs",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "all_frames": true,
+    "js": ["assets/js/contentScript.js"]
+}],
+  "web_accessible_resources": [{  
+  "resources": ["logo192.png", "logo512.png", "happy.png"],
+  "matches": ["<all_urls>"]}
+  ]
+}
