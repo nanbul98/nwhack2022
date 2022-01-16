@@ -3,12 +3,6 @@
 
 
 
-
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ logo });
-  console.log('Default logo set to', `logo: ${logo}`);
-});
-
 chrome.runtime.onMessage.addListener(async function(message, sender, senderResponse){
   if (message.msg === "image") {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
