@@ -2,14 +2,6 @@
 // background.js
 
 
-// import rp from 'request-promise';
-// import $ from 'cheerio';
-
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ logo });
-  console.log('Default logo set to', `logo: ${logo}`);
-});
-
 chrome.runtime.onMessage.addListener(async function(message, sender, senderResponse){
   if (message.msg === "image") {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -21,6 +13,7 @@ chrome.runtime.onMessage.addListener(async function(message, sender, senderRespo
     return true;
   }
 });
+
 
 function addImage() {
   // var require_script = document.createElement('script');
