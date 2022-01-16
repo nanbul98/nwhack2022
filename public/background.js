@@ -16,9 +16,6 @@ chrome.runtime.onMessage.addListener(async function(message, sender, senderRespo
 
 
 function addImage() {
-  // var require_script = document.createElement('script');
-  // require_script.setAttribute("src","assets/js/require.js");
-  // document.head.appendChild(require_script);
   let logo = chrome.runtime.getURL("happy.png");
   var elemDiv = document.createElement('img');
   elemDiv.setAttribute("id", "blobby67");
