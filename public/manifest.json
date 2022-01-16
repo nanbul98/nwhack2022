@@ -7,6 +7,9 @@
   "background": {
     "service_worker": "background.js"
   },
+  "action": {
+    "default_popup": "popup.html"
+  },
   "permissions": [ "storage", "activeTab", "scripting","tabs",
     "notifications"
   ],
@@ -17,10 +20,13 @@
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "all_frames": true,
-    "js": ["assets/js/require.js","assets/js/contentScript.js"]
-}],
+    "js": ["assets/js/require.js","jquery-3.2.1.js", "content.js"],
+    "css": ["main.css"]
+    }],
   "web_accessible_resources": [{  
-  "resources": ["logo192.png", "logo512.png", "happy.png"],
+  "resources": ["logo192.png", "logo512.png", "happy.png", "happy2.png", "snorkler.png",
+    "angry.png", "iffy.png", "loading.png", "scared.png"],
   "matches": ["<all_urls>"]}
   ]
+
 }
