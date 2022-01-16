@@ -18,11 +18,6 @@ chrome.runtime.onMessage.addListener(async function(message, sender, senderRespo
       target: { tabId: tab.id },
       function: addImage,
     });
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: scraper,
-    });
-    // senderResponse({data: tab});
     return true;
   }
 });
@@ -37,64 +32,11 @@ function addImage() {
       elemDiv.style.cssText = 'position: fixed;right: 10px;bottom: 10px;z-index: 1000;width:125px;';
       elemDiv.src = logo;
       document.body.appendChild(elemDiv);
+      fetch("https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/e9db5587-e4e6-479b-b4ee-7af1cdc6454e/v3/tone?version=2017-09-21&text=Team%2C%20I%20know%20that%20times%20are%20tough%21%20Product%20sales%20have%20been%20disappointing%20for%20the%20past%20three%20quarters.%20We%20have%20a%20competitive%20product%2C%20but%20we%20need%20to%20do%20a%20better%20job%20of%20selling%20it%21", {
+  headers: {
+    Authorization: "Basic YXBpa2V5OmpTY3ZuMVVKWkdKMXJIMVgwRm9VckNzU3Q2QXV4WlNHdEdvTDlSRnZZNzFW"
+  }
+}).then(response => response.json()).then(response => {
+  console.log(response)
+})
 }
-
-
-  // SCRAPING
-function scraper(){
-  require(['request-promise', 'cheerio'], function (rp, $) {
-    const url = 'https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States';
-  
-    rp(url)
-      .then(function(html){
-        //success!
-        const wikiUrls = [];
-        for (let i = 0; i < 45; i++) {
-          wikiUrls.push($('big > a', html)[i].attribs.href);
-        }
-        console.log(wikiUrls);
-      })
-      .catch(function(err){
-        //handle error
-      });
-  });
-  // const rp = require('request-promise');
-  // const $ = require('cheerio');
- 
-}
-
-
-// TONE ANALYZER
-function toneAnalyze() {
-  const dotenv = require('dotenv')
-  dotenv.config()
-  const ToneAnalyzerV3 = require('ibm-watson/tone-analyzer/v3');
-  const { IamAuthenticator } = require('ibm-watson/auth');
-
-  const toneAnalyzer = new ToneAnalyzerV3({
-    version: '2017-09-21',
-    authenticator: new IamAuthenticator({
-      apikey: process.env.api_key,
-    }),
-    serviceUrl: process.env.api_url,
-  });
-
-  const text = 'Team, I know that times are tough! Product '
-    + 'sales have been disappointing for the past three '
-    + 'quarters. We have a competitive product, but we '
-    + 'need to do a better job of selling it!';
-
-  const toneParams = {
-    toneInput: { 'text': text },
-    contentType: 'application/json',
-  };
-
-  toneAnalyzer.tone(toneParams)
-    .then(toneAnalysis => {
-      console.log(JSON.stringify(toneAnalysis, null, 2));
-    })
-    .catch(err => {
-      console.log('error:', err);
-    });
-}
-
