@@ -25,8 +25,8 @@ function addImage() {
     document.body.appendChild(elemDiv);
   }
 
-  // var paragraphs = document.getElementsByClassName("css-axufdj")[0].textContent;
-  var ap = document.getElementsByClassName("Component-root-0-2-55")[0].textContent;
+  var paragraphs = document.getElementsByClassName("css-axufdj")[0].textContent;
+  // var ap = document.getElementsByClassName("Component-root-0-2-55")[0].textContent;
   var emotion = "";
   // var anger = 0;
   // var fear = 0;
@@ -41,9 +41,9 @@ function addImage() {
   // var modeEmotion;
   // var text = "";
   // for(var i = 0; i < paragraphs.length; i++) {
-    // var enc_text = encodeURIComponent(paragraphs);
-    var enc_ap = encodeURIComponent(ap);
-    console.log(enc_ap)
+    var enc_text = encodeURIComponent(paragraphs);
+    // var enc_ap = encodeURIComponent(ap);
+    // console.log(enc_ap)
     // console.log(enc_text)
     // fetch(`https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/e9db5587-e4e6-479b-b4ee-7af1cdc6454e/v3/tone?version=2017-09-21&text=${enc_text}`, {
     //   headers: {
@@ -63,7 +63,7 @@ function addImage() {
     // // })
     // })
 
-    fetch("https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/e6e23a80-d1dd-4c73-98c4-d12c4623e5e3/v3/tone?version=2017-09-21&text=Team%2C%20I%20know%20that%20times%20are%20tough%21%20Product%20sales%20have%20been%20disappointing%20for%20the%20past%20three%20quarters.%20We%20have%20a%20competitive%20product%2C%20but%20we%20need%20to%20do%20a%20better%20job%20of%20selling%20it%21", {
+    fetch(`https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/e6e23a80-d1dd-4c73-98c4-d12c4623e5e3/v3/tone?version=2017-09-21&text=${enc_text}`, {
       headers: {
         Authorization: "Basic YXBpa2V5OmF6US1rNnRreTZCQ3lEWE12SVBpcVhKbnJDRXgwcFJMS0s0VDg0aW9kMFhi"
       }
