@@ -16,12 +16,15 @@ chrome.runtime.onMessage.addListener(async function(message, sender, senderRespo
 
 
 function addImage() {
-  let logo = chrome.runtime.getURL("happy.png");
-  var elemDiv = document.createElement('img');
-  elemDiv.setAttribute("id", "blobby67");
-  elemDiv.style.cssText = 'position: fixed;right: 10px;bottom: 10px;z-index: 1000;width:125px;';
-  elemDiv.src = logo;
-  document.body.appendChild(elemDiv);
+  if (document.getElementById("blobby67") == null){
+    let logo = chrome.runtime.getURL("happy.png");
+    var elemDiv = document.createElement('img');
+    elemDiv.setAttribute("id", "blobby67");
+    elemDiv.style.cssText = 'position: fixed;right: 10px;bottom: 10px;z-index: 1000;width:125px;';
+    elemDiv.src = logo;
+    document.body.appendChild(elemDiv);
+  }
+
   // var paragraphs = document.getElementsByClassName("css-axufdj")[0].textContent;
   var ap = document.getElementsByClassName("Component-root-0-2-55")[0].textContent;
   var emotion = "";
@@ -60,15 +63,24 @@ function addImage() {
     // // })
     // })
 
-    fetch(`https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/9a31545b-cdc0-4cbb-8eb7-4bd1469db1c3/v3/tone?version=2017-09-21&text=${enc_ap}`, {
+    fetch("https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/e6e23a80-d1dd-4c73-98c4-d12c4623e5e3/v3/tone?version=2017-09-21&text=Team%2C%20I%20know%20that%20times%20are%20tough%21%20Product%20sales%20have%20been%20disappointing%20for%20the%20past%20three%20quarters.%20We%20have%20a%20competitive%20product%2C%20but%20we%20need%20to%20do%20a%20better%20job%20of%20selling%20it%21", {
       headers: {
-        Authorization: "Basic YXBpa2V5OmdSM3ZLdE9zX1RuanFNd0p0Mk5VcEdBS0o2dm5FcE9GYzd2Q0gwOEhvTEox"
+        Authorization: "Basic YXBpa2V5OmF6US1rNnRreTZCQ3lEWE12SVBpcVhKbnJDRXgwcFJMS0s0VDg0aW9kMFhi"
       }
     }).then(response => response.json()).then(response => {
       emotion = response.document_tone.tones[0].tone_name;
-      // if (emotion == "Fear") {
-      //   chrome.runtime.getURL("scared.png");
-      // }
+      var blob = document.getElementById("blobby67")
+      // curr_blob.style.display='none';
+
+      if (emotion == "Fear") {
+        blob.src = chrome.runtime.getURL("scared.png");
+      } else if (emotion == "Anger") {
+        blob.src = chrome.runtime.getURL("angry.png");
+      } else if (emotion == "Sadness") {
+        blob.src = chrome.runtime.getURL("scared.png");
+      } else {
+        blob.src = chrome.runtime.getURL("happy.png");
+      }
       console.log(emotion)
     //   response.document_tone.tones.forEach((x) => {
     //     console.log(x, "tone")
