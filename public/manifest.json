@@ -29,7 +29,7 @@
     }],
   "web_accessible_resources": [{  
   "resources": ["logo192.png", "logo512.png", "happy.png", "happy2.png", "snorkler.png",
-    "angry.png", "iffy.png", "loading.png", "scared.png"],
+    "angry.png", "iffy.png", "loading.png", "scared.png", "angrypopup.png", "fearpopup.png"],
   "matches": ["<all_urls>"]}
   ]
 
